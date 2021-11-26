@@ -11,6 +11,7 @@ const app = express();
 app.get('/:user/:location', (req, res) => {
   res.append('Location', req.params.location);
   res.append('User', req.params.user);
+  res.append('Name', req.params.user);
   res.send(`Hello, ${req.params.user} from ${req.params.location}`);
 });
 
