@@ -6,6 +6,14 @@
 trigger:
 - master
 
+resources:
+  pipelines:
+    - pipeline: upstream
+      source: silviuandrica.pipelines-javascript
+      trigger:
+        branches:
+          - main
+
 pool:
   vmImage: ubuntu-latest
 
