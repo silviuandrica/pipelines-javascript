@@ -17,5 +17,18 @@ resources:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo silviuandrica.pipelines-javascript
+stages:
+  - stage: build 
+    jobs: 
+      - job:
+        steps:
+        - script: echo downstream!
+  - stage: deploy
+    jobs:
+      - deployment: deployJob
+        environment: Production
+        strategy:
+          runOnce:    #rolling, canary are the other strategies that are supported
+            deploy:
+              steps:
+                - script: echo Deploying
