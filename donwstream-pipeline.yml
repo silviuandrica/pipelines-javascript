@@ -1,0 +1,34 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+resources:
+  pipelines:
+    - pipeline: upstream
+      source: silviuandrica.pipelines-javascript
+      trigger:
+        branches:
+          - master
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+  - stage: build 
+    jobs: 
+      - job:
+        steps:
+        - script: echo downstream!
+  - stage: deploy
+    jobs:
+      - deployment: deployJob
+        environment: Production
+        strategy:
+          runOnce:    #rolling, canary are the other strategies that are supported
+            deploy:
+              steps:
+                - script: echo Deploying
