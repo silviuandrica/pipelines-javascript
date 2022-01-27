@@ -5,6 +5,10 @@
     
 trigger:
 - master
+- silviuandrica-user-header
+
+pr:
+- master
 
 extends:
   template: base.yml
