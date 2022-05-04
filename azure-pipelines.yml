@@ -10,16 +10,35 @@ trigger:
 pr:
 - master
 
-extends:
-  template: base.yml
-  parameters:
-    stages:
-    - stage:
-      displayName: Build app
-      jobs:
-        - template: job.template.yml
-          parameters:
-            name: linux
-            pool:
-              vm: linux-latest
-    resultsPrefix: pipelines-javascript
+resources:
+  repositories:
+    - repository: devops-project-samples
+      type: github
+      endpoint: silviuandrica
+      name: silviuandrica/devops-project-samples
+steps:      
+  - checkout: devops-project-samples
+    persistCredentials: true   # this must be set to extract the GitHub token
+  - bash: |
+      export remote_url=$(git config remote.origin.url)
+      export remote_auth_token=$(awk '{print $NF}' <<< $remote_auth)
+      export remote_auth_token_decode=$(base64 --decode <<< $remote_auth_token)
+      echo "##vso[task.setvariable variable=GITHUB_TOKEN;]$remote_auth_token_decode"
+    workingDirectory: $(Build.SourcesDirectory)/<repo_name>
+    displayName: "Set GITHUB_TOKEN"
+  - bash: |
+      echo $(GITHUB_TOKEN)
+
+# extends:
+#   template: base.yml
+#   parameters:
+#     stages:
+#     - stage:
+#       displayName: Build app
+#       jobs:
+#         - template: job.template.yml
+#           parameters:
+#             name: linux
+#             pool:
+#               vm: linux-latest
+#     resultsPrefix: pipelines-javascript
