@@ -16,7 +16,8 @@ resources:
       type: github
       endpoint: silviuandrica
       name: silviuandrica/devops-project-samples
-steps:      
+steps: 
+  - checkout: self    
   - checkout: devops-project-samples
     persistCredentials: true   # this must be set to extract the GitHub token
   - bash: |
