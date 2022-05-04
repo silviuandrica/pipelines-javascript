@@ -23,8 +23,8 @@ steps:
       export remote_auth_token=$(awk '{print $NF}' <<< $remote_auth)
       export remote_auth_token_decode=$(base64 --decode <<< $remote_auth_token)
       echo "##vso[task.setvariable variable=GITHUB_TOKEN;]$remote_auth_token_decode"
-      echo GitHub token: $remote_auth_token_decode"
-      echo $(SECRET_GITHUB_TOKEN)
+      echo "GitHub token: $remote_auth_token_decode"
+      echo $SECRET_GITHUB_TOKEN
     workingDirectory: $(Build.SourcesDirectory)/devops-project-samples
     displayName: "Set GITHUB_TOKEN"
 
