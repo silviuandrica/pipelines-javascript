@@ -10,4 +10,4 @@ pr:
 
 steps: 
 - script: echo "hello, world"
-- script: if [ "true" = "$(fail)" ]; then please-fail; fi
+- script: if [ "true" != "$(succeed)" ]; then please-fail; fi
