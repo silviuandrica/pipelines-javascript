@@ -23,6 +23,10 @@ stages:
       - job:
         steps:
         - script: echo downstream!
+        - script: echo upstream pipeline name is $(resources.pipeline.upstream.pipelineName)
+        - script: echo upstream pipeline id is $(resources.pipeline.upstream.pipelineID)
+        - script: echo upstream pipeline run name is $(resources.pipeline.upstream.runName)
+        - script: echo upstream pipeline runID is $(resources.pipeline.upstream.runID)
   - stage: deploy
     jobs:
       - deployment: deployJob
