@@ -3,8 +3,7 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- master
+trigger: none
 
 resources:
   pipelines:
@@ -13,6 +12,11 @@ resources:
       trigger:
         branches:
           - master
+  repositories:
+    - repository: devops-project-samples
+      type: github
+      endpoint: silviuandrica
+      name: silviuandrica/devops-project-samples
 
 pool:
   vmImage: ubuntu-latest
@@ -22,6 +26,8 @@ stages:
     jobs: 
       - job:
         steps:
+        - checkout: self
+        - checkout: devops-project-samples
         - script: echo downstream!
         - script: echo upstream pipeline name is $(resources.pipeline.upstream.pipelineName)
         - script: echo upstream pipeline id is $(resources.pipeline.upstream.pipelineID)
@@ -30,7 +36,7 @@ stages:
   - stage: deploy
     jobs:
       - deployment: deployJob
-        environment: Production
+        environment: Local
         strategy:
           runOnce:    #rolling, canary are the other strategies that are supported
             deploy:
