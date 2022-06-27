@@ -8,6 +8,16 @@ trigger: none
 pr:
 - master
 
-steps: 
-- script: echo "hello, world"
-- script: if [ "true" != "$(succeed)" ]; then please-fail; fi
+extends:
+  template: base.yml
+  parameters:
+    stages:
+    - stage:
+      displayName: Build app
+      jobs:
+        - template: job.template.yml
+          parameters:
+            name: linux
+            pool:
+              vm: linux-latest
+    resultsPrefix: pipelines-javascript
