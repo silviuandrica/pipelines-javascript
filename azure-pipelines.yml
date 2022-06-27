@@ -11,13 +11,5 @@ pr:
 extends:
   template: base.yml
   parameters:
-    stages:
-    - stage:
-      displayName: Build app
-      jobs:
-        - template: job.template.yml
-          parameters:
-            name: linux
-            pool:
-              vm: linux-latest
+    stages: []
     resultsPrefix: pipelines-javascript
