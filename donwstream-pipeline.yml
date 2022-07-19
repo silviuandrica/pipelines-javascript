@@ -11,6 +11,7 @@ resources:
       source: silviuandrica.pipelines-javascript
       branch: main
       trigger: true
+      
   repositories:
     - repository: devops-project-samples
       type: github
