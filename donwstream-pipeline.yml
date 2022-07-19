@@ -5,11 +5,13 @@
 
 trigger: none
 
+variables:
+  runNumber: 20220627.3
 resources:
   pipelines:
     - pipeline: upstream
       source: silviuandrica.pipelines-javascript
-      branch: $(Build.SourceBranchName)
+      branch: $(runNumber)
       trigger: true
 
   repositories:
