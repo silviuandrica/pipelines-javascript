@@ -9,9 +9,8 @@ resources:
   pipelines:
     - pipeline: upstream
       source: silviuandrica.pipelines-javascript
-      trigger:
-        branches:
-          - master
+      branch: $(Build.SourceBranch)
+      trigger: true
   repositories:
     - repository: devops-project-samples
       type: github
