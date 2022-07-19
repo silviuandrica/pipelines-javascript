@@ -11,7 +11,7 @@ resources:
   pipelines:
     - pipeline: upstream
       source: silviuandrica.pipelines-javascript
-      branch: $(runNumber)
+      version: $(runNumber)
       trigger: true
 
   repositories:
