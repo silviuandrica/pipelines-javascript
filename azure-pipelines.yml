@@ -8,10 +8,8 @@ trigger: none
 pr:
 - master
 
-# extends:
-#   template: base.yml
-#   parameters:
-#     stages: []
-#     resultsPrefix: pipelines-javascript
-steps:
-  - script: echo "Im done"
+extends:
+  template: base.yml
+  parameters:
+    stages: []
+    resultsPrefix: pipelines-javascript
